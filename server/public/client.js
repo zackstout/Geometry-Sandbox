@@ -9,8 +9,8 @@ app.config(function($routeProvider) {
   }).when('/ellipse', {
     templateUrl: 'ellipse.html',
     controller: 'EllipseController as ec'
-  }).when('/sliding', {
-    templateUrl: 'sliding.html',
-    controller: 'SlidingController as sc'
+  }).when('/matrix', {
+    templateUrl: 'matrix.html',
+    controller: 'MatrixController as sc'
   });
 });

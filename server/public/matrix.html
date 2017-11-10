@@ -1,5 +1,7 @@
 
 <br>
+<p>First load up the grid, then parabolas will work....if you click twice? Wait no -- we fixed that by....transforming again after drawing second half of parab? weird.</p>
+<br>
     <strong>Enter some Paraballin' params dog</strong><br>
     a: <input type="number" ng-model='sc.params.a'><br>
     b: <input type="number" ng-model='sc.params.b'><br>
@@ -13,6 +15,8 @@
     d: <input type="number" ng-model='sc.matrix.d'><br>
     <button ng-click="sc.matrixThat(sc.matrix)">Matrix!</button>
     <br><button ng-click="sc.gridThat(10, 1000)">Grid that homie</button>
+    <br><br>
+    <button ng-click="sc.throwBall(sc.params.c)">THROW</button>
 
     <div>
     <canvas id="canvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
