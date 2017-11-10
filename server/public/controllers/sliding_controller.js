@@ -40,12 +40,13 @@ app.controller('MatrixController', function () {
     grid(10, 1000);
   };
 
-var iteration = 0;
+//ok this is good to know, if we start the iteration high and count down toward 0, it will run in the opposite direction:
+var iteration = 100;
 
   function ball() {
     //putting this at top makes it stay yellow:
     //and yet also makes it impossible to see parabolas:
-    // ctx.clearRect(-10,-10,1000,1000);
+    ctx.clearRect(-500,-10,1000,1000);
 
       ctx.beginPath();
       //oh duh this controls the path of the ball:
@@ -53,7 +54,7 @@ var iteration = 0;
       ctx.stroke();
       ctx.fillStyle = 'yellow';
       ctx.fill();
-      iteration++;
+      iteration--;
       //this is real close:
       //whoa super weird if you put this up after clear, it shows 2 balls
 
@@ -61,20 +62,38 @@ var iteration = 0;
       // parabola(70, 5, vm.params.a, 0, vm.params.b, 1);
   }
 
+  function ballNeg() {
+
+      ctx.beginPath();
+      //oh duh this controls the path of the ball:
+      ctx.arc((-1)*iteration*5, vm.params.a*Math.pow(iteration*5/100, 2)*100, 10, 0, 2*Math.PI);
+      ctx.stroke();
+      ctx.fillStyle = 'yellow';
+      ctx.fill();
+      iteration--;
+
+  }
+
   //good: it draws all the balls! we just need to animate now:
   // ball();
 
 vm.throwBall = function(c) {
+  //but this is gonna mess up the other origins, e.g. the grid's:
   ctx.translate(500, c*100);
   console.log('throwin ball');
-  // ball();
+
+  //yesssss if you don't call ballNeg, ball will work all the way through because of negatively counting!!!
   setInterval(ball, 50);
+  // setInterval(ballNeg, 50);
+
 };
-
-  //YASSSS, now just need to erase previous balls:
-  // setInterval(ball, 50);
-
-
+// vm.throwBallNeg = function(c) {
+//   //but this is gonna mess up the other origins, e.g. the grid's:
+//   ctx.translate(500, c*100);
+//   console.log('throwin ball');
+//   // ball();
+//   setInterval(ballNeg, 50);
+// };
 
   function grid(x, s) {
     for (var i = 0; i <= x; i++) {
