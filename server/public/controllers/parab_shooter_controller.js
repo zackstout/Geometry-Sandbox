@@ -38,6 +38,7 @@ app.controller('ParabShooterController', function () {
   vm.reset = function() {
     iteration = 0;
     count = 0;
+    gotOne = false;
     ctx.clearRect(0,0,1000,1000);
     parabola(70, 5, 1, 0, 1, 1);
     ctx.transform(-1, 0, 0, 1, 0, 0);
@@ -48,7 +49,7 @@ app.controller('ParabShooterController', function () {
     ctx.stroke();
     ctx.fillStyle = 'blue';
     ctx.fill();
-    setInterval(whereAreWe, 20);
+    setInterval(whereAreWe, 2);
 
   };
 
@@ -82,20 +83,25 @@ app.controller('ParabShooterController', function () {
     } //end BALL
 
 var count = 0;
+var gotOne = false;
     function whereAreWe() {
-      // if (count<50) {
-        var x = 500+vm.params.b*iteration*Math.cos(vm.params.a*Math.PI/180);
-        var y = 125+vm.params.b*iteration*Math.sin(vm.params.a*Math.PI/180);
+      if (!gotOne) {
+        var x = 500+vm.params.b*(iteration)*Math.cos(vm.params.a*Math.PI/180);
+        var y = 125+vm.params.b*(iteration)*Math.sin(vm.params.a*Math.PI/180);
         // console.log('x: ', x, ',  y: ', y);
 
             var xNow = (x-500)/100;
             var yNow = (y-100)/100;
             // console.log(xNow, yNow);
 
-            if (xNow*xNow < yNow+0.05 && xNow*xNow > yNow-0.05) {
-              console.log('meow!!!');
+            if (xNow*xNow < yNow+0.02 && xNow*xNow > yNow-0.02) {
+            // if (xNow*xNow === yNow) {
+              console.log('meow!!!', xNow, yNow);
+              gotOne = true;
+
+              // return;
             }
-      // }
+      }
       count++;
     }
 
