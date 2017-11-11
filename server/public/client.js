@@ -4,16 +4,19 @@ var app = angular.module('app', ['ngRoute']);
 
 app.config(function($routeProvider) {
   $routeProvider.when('/parabola', {
-    templateUrl: 'parabola.html',
+    templateUrl: 'templates/parabola.html',
     controller: 'ParabolaController as pc'
   }).when('/ellipse', {
-    templateUrl: 'ellipse.html',
+    templateUrl: 'templates/ellipse.html',
     controller: 'EllipseController as ec'
   }).when('/matrix', {
-    templateUrl: 'matrix.html',
+    templateUrl: 'templates/matrix.html',
     controller: 'MatrixController as sc'
   }).when('/shooter', {
-    templateUrl: 'shooter.html',
+    templateUrl: 'templates/shooter.html',
     controller: 'ShooterController as sc'
+  }).when('/parab_shooter', {
+    templateUrl: 'templates/parab_shooter.html',
+    controller: 'ParabShooterController as psc'
   });
 });
