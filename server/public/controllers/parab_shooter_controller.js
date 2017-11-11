@@ -5,8 +5,7 @@ app.controller('ParabShooterController', function () {
       var ctx = canvas.getContext("2d");
     var vm = this;
   vm.params = {};
-  var iteration = 0;
-
+  var iteration = 0, iteration2 = 0;
 
   parabola(70, 5, 1, 0, 1, 1);
   ctx.transform(-1, 0, 0, 1, 0, 0);
@@ -17,27 +16,15 @@ app.controller('ParabShooterController', function () {
   ctx.stroke();
   ctx.fillStyle = 'blue';
   ctx.fill();
-//
-// vm.params.xNow = 500+vm.params.b*iteration*Math.cos(vm.params.a*Math.PI/180);
-// vm.params.yNow = 150+vm.params.b*iteration*Math.sin(vm.params.a*Math.PI/180);
 
   vm.shootBall = function(a, b) {
     console.log(a, b, vm.params.a, vm.params.b);
     setInterval(ball, 50);
     setInterval(whereAreWe, 5);
-    //
-    // var xNow = (vm.params.xNow-500)/100;
-    // var yNow = (vm.params.yNow-100)/100;
-    //
-    // if ((Math.pow(xNow), 2) > yNow-10 && (Math.pow(xNow), 2) < yNow+10) {
-    //   console.log('meow!!!');
-    // }
-
   };
 
   vm.reset = function() {
     iteration = 0;
-    count = 0;
     gotOne = false;
     ctx.clearRect(0,0,1000,1000);
     parabola(70, 5, 1, 0, 1, 1);
@@ -50,12 +37,9 @@ app.controller('ParabShooterController', function () {
     ctx.fillStyle = 'blue';
     ctx.fill();
     setInterval(whereAreWe, 2);
-
   };
 
-
     function ball() {
-
       ctx.clearRect(0,0,1000,1000);
       parabola(70, 5, 1, 0, 1, 1);
       ctx.transform(-1, 0, 0, 1, 0, 0);
@@ -66,7 +50,7 @@ app.controller('ParabShooterController', function () {
       ctx.stroke();
       ctx.fillStyle = 'blue';
       ctx.fill();
-
+//draw the tangent:
       ctx.moveTo(vm.params.x1, vm.params.y1);
       ctx.lineTo(vm.params.x2, vm.params.y2);
       ctx.stroke();
@@ -76,17 +60,39 @@ app.controller('ParabShooterController', function () {
 
         ctx.beginPath();
         ctx.arc(500 + v*iteration*Math.cos(theta), 125 + v*iteration*Math.sin(theta), 10, 0, 2*Math.PI);
-        // ok good, as anticipated,this is a (slow) linear speed:
-        // ctx.arc(500, iteration*2, 10, 0, 2*Math.PI);
         ctx.stroke();
         ctx.fillStyle = 'yellow';
         ctx.fill();
         iteration++;
-
-
     } //end BALL
 
-var count = 0;
+    function ball2() {
+      ctx.clearRect(0,0,1000,1000);
+      parabola(70, 5, 1, 0, 1, 1);
+      ctx.transform(-1, 0, 0, 1, 0, 0);
+      parabola(70, 5, 1, 0, 1, -1);
+      ctx.transform(-1, 0, 0, 1, 0, 0);
+      ctx.beginPath();
+      ctx.arc(500, 125, 10, 0, 2*Math.PI);
+      ctx.stroke();
+      ctx.fillStyle = 'blue';
+      ctx.fill();
+//draw the tangent:
+      ctx.moveTo(vm.params.x1, vm.params.y1);
+      ctx.lineTo(vm.params.x2, vm.params.y2);
+      ctx.stroke();
+
+      var v = vm.params.b;
+      // var theta = vm.params.a*Math.PI/180;
+
+        ctx.beginPath();
+        ctx.arc(vm.params.x, vm.params.y + v*iteration2, 10, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+        iteration2++;
+    } //end BALL
+
 var gotOne = false;
     function whereAreWe() {
       if (!gotOne) {
@@ -110,11 +116,14 @@ var gotOne = false;
               vm.params.x2 = x+100;
               vm.params.y1 = y - 2*xNow*100;
               vm.params.y2 = y + 2*xNow*100;
+              vm.params.x = x;
+              vm.params.y = y;
+
+              setInterval(ball2, 50);
 
               // return;
             }
       }
-      count++;
     }
 
   function parabola(x, l, a, b, c, dir) {
