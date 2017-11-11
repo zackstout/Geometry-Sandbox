@@ -1,7 +1,7 @@
 
 
-app.controller('EllipseController', function () {
-    console.log('ellipse controller created.');
+app.controller('ShooterController', function () {
+    console.log('shooter controller created.');
     var canvas = document.getElementById('canvas');
       var ctx = canvas.getContext("2d");
     var vm = this;
@@ -62,7 +62,7 @@ app.controller('EllipseController', function () {
 //and don't forget the pool table idea, i.e. bouncing balls off of the parabola from the focus!!!
 //should really really really illustrate transition from an ellipse to a parabola, i.e. eccentricity getting closer and closer to 1 and then surpassing it, that would be amazing
 ctx.translate(500, 500);
-    circle(1, 1, 6, 250);
+    circle(1, 1, 5, 250);
 //
 // ctx.strokeStyle = "blue";
 //     circle(2, 2, 100, 250);

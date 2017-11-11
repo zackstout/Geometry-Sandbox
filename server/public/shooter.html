@@ -1,0 +1,11 @@
+
+a: <input type="number" ng-model='ec.params.a'><br>
+b: <input type="number" ng-model='ec.params.b'><br>
+<button ng-click="ec.drawEllipse(ec.params.a, ec.params.b)">Draw!</button>
+<br><br>
+<button ng-click="ec.throw()">Throw!</button>
+
+
+    <div>
+    <canvas id="canvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+    </div>

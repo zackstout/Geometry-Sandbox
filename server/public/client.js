@@ -12,5 +12,8 @@ app.config(function($routeProvider) {
   }).when('/matrix', {
     templateUrl: 'matrix.html',
     controller: 'MatrixController as sc'
+  }).when('/shooter', {
+    templateUrl: 'shooter.html',
+    controller: 'ShooterController as sc'
   });
 });
