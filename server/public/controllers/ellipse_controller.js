@@ -66,8 +66,23 @@ ctx.translate(500, 500);
 var iteration = 0;
 
     function ball() {
-  //putting this at top makes it stay yellow:
+  //yep, this is how you make something stay visible even when you keep re-calling the function every 1/20 of a second:
   ctx.clearRect(-500,-500,1000,1000);
+  var a = vm.params.a;
+  var b = vm.params.b;
+  var c = Math.sqrt(Math.abs(Math.pow(a, 2) - Math.pow(b, 2)));
+
+  ctx.beginPath();
+  if (a > b) {
+    ctx.arc(c*250, 0, 20, 0, 2*Math.PI);
+    ctx.stroke();
+  } else if (b > a) {
+    ctx.arc(0, c*250, 20, 0, 2*Math.PI);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = 'green';
+  ctx.fill();
 
     ctx.beginPath();
     ctx.arc(250*vm.params.a*Math.cos(iteration*2*Math.PI/100), 250*vm.params.b*Math.sin(iteration*2*Math.PI/100), 10, 0, 2*Math.PI);
@@ -84,6 +99,7 @@ ctx.strokeStyle = "black";
 
 vm.throw = function() {
   console.log('throwin');
+  //making this number higher does make it go slower, but at much lower res:
   setInterval(ball, 50);
 
 };
