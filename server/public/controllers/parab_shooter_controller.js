@@ -67,6 +67,10 @@ app.controller('ParabShooterController', function () {
       ctx.fillStyle = 'blue';
       ctx.fill();
 
+      ctx.moveTo(vm.params.x1, vm.params.y1);
+      ctx.lineTo(vm.params.x2, vm.params.y2);
+      ctx.stroke();
+
       var v = vm.params.b;
       var theta = vm.params.a*Math.PI/180;
 
@@ -96,8 +100,16 @@ var gotOne = false;
 
             if (xNow*xNow < yNow+0.02 && xNow*xNow > yNow-0.02) {
             // if (xNow*xNow === yNow) {
-              console.log('meow!!!', xNow, yNow);
+              console.log('meow!!!', xNow, yNow, x, y);
               gotOne = true;
+              ctx.moveTo(x - 100, y - 2*xNow*100);
+              ctx.lineTo(x + 100, y + 2*xNow*100);
+              ctx.stroke();
+
+              vm.params.x1 = x-100;
+              vm.params.x2 = x+100;
+              vm.params.y1 = y - 2*xNow*100;
+              vm.params.y2 = y + 2*xNow*100;
 
               // return;
             }
