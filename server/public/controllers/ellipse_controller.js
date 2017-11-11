@@ -7,8 +7,36 @@ app.controller('EllipseController', function () {
     var vm = this;
   vm.value = 10;
 
+  vm.params = {};
+
+//wow you have to make a and b reallllllly close to get focus close to center, i.e. to get eccentricity close to 0 (max ecc for a planet is .22, which is about a 2:1.95 ratio for a:b):
+  vm.drawEllipse = function(a, b) {
+    var c = Math.sqrt(Math.abs(Math.pow(a, 2) - Math.pow(b, 2)));
+    var e = c/a;
+    console.log(a, b, c, e);
+    // why not working?:
+    ctx.clearRect(0,0,1000,1000);
+    console.log('drawin');
+    circle(a, b, 100, 250);
 
 
+    ctx.beginPath();
+    if (a > b) {
+      ctx.arc(c*250, 0, 20, 0, 2*Math.PI);
+      ctx.stroke();
+    } else if (b > a) {
+      ctx.arc(0, c*250, 20, 0, 2*Math.PI);
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = 'green';
+    ctx.fill();
+
+    console.log(vm.params);
+  };
+
+
+//wait what the fuck is up with 10000 and 1000? i guess that's why we're using circle lol:
     function ellipse(x, l) {
       for (var i = 0; i < x; i++) {
         ctx.moveTo(i*l, Math.pow((1000 - Math.pow(i*l/100, 2)*10000), 1/2));
@@ -17,6 +45,7 @@ app.controller('EllipseController', function () {
       }
     }
 
+//now encompasses ellipse functionality:
     function circle(a, b, x, r) {
       for (var i = 0; i < x; i++) {
         ctx.moveTo(r*a*Math.cos(i*2*Math.PI/x), r*b*Math.sin(i*2*Math.PI/x));
@@ -26,7 +55,7 @@ app.controller('EllipseController', function () {
     }
 
 ctx.translate(500, 500);
-    circle(2, 1, 100, 250);
+    circle(1, 1, 12, 250);
 //
 // ctx.strokeStyle = "blue";
 //     circle(2, 2, 100, 250);
@@ -38,10 +67,10 @@ var iteration = 0;
 
     function ball() {
   //putting this at top makes it stay yellow:
-  // ctx.clearRect(-10,-10,1000,1000);
+  ctx.clearRect(-500,-500,1000,1000);
 
     ctx.beginPath();
-    ctx.arc(500*Math.cos(iteration*2*Math.PI/100), 250*Math.sin(iteration*2*Math.PI/100), 10, 0, 2*Math.PI);
+    ctx.arc(250*vm.params.a*Math.cos(iteration*2*Math.PI/100), 250*vm.params.b*Math.sin(iteration*2*Math.PI/100), 10, 0, 2*Math.PI);
     ctx.stroke();
     ctx.fillStyle = 'yellow';
     ctx.fill();
@@ -49,14 +78,14 @@ var iteration = 0;
     //this is real close:
     //whoa super weird if you put this up after clear, it shows 2 balls
 ctx.strokeStyle = "black";
-    circle(2, 1, 100, 250);
+    // circle(2, 1, 100, 250);
   // requestAnimationFrame(ball);
 }
 
-//good: it draws all the balls! we just need to animate now:
-ball();
+vm.throw = function() {
+  console.log('throwin');
+  setInterval(ball, 50);
 
-
+};
 //YASSSS, now just need to erase previous balls:
-setInterval(ball, 50);
 });

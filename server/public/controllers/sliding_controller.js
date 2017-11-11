@@ -47,6 +47,10 @@ var iteration = 100;
     //putting this at top makes it stay yellow:
     //and yet also makes it impossible to see parabolas:
     ctx.clearRect(-500,-10,1000,1000);
+    // ctx.transform(-1, 0, 0, 1, 0, 0);
+    ctx.clearRect(-500,-990,1000,1000);
+    // ctx.transform(-1, 0, 0, 1, 0, 0);
+
 
       ctx.beginPath();
       //oh duh this controls the path of the ball:
