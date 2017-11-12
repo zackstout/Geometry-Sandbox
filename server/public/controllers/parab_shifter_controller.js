@@ -75,23 +75,30 @@ app.controller('ParabShifterController', function () {
     ctx.fillStyle = 'green';
     ctx.fill();
 
-  };
+  }; //end of submit function
+
+
 var iteration = 0;
   function ball() {
-    // console.log('ballin');
-
 
     ctx.beginPath();
-    // ctx.arc(250*vm.params.a*Math.cos(iteration*2*Math.PI/100), 250*vm.params.b*Math.sin(iteration*2*Math.PI/100), 10, 0, 2*Math.PI);
-    // var x = -2;
-    ctx.arc(250 + iteration*2, 200, 10, 0, 2*Math.PI);
 
+    var x = 250 + iteration*2;
+    var xNow = (x-500)/100;
+    ctx.arc(250 + iteration*2, 250 + xNow*xNow*100, 10, 0, 2*Math.PI);
     ctx.stroke();
+    //
+    // ctx.beginPath();
+    // ctx.arc(x, y, 6, 0, 2*Math.PI);
+    // ctx.stroke();
+    // ctx.fillStyle = 'green';
+    // ctx.fill();
+    // ctx.stroke();
     ctx.fillStyle = 'yellow';
     ctx.fill();
     iteration++;
 
-  }
+  } //end of ball
 
   vm.throw = function() {
     console.log('thx for throwin', vm.params);
