@@ -1,0 +1,17 @@
+
+<h2>Parabola Shifter</h2>
+<br>
+<p>x<sup>2</sup> = 4py</p>
+
+<p>Initially, p = 0.25. As p grows, the parabola becomes flatter.</p>
+<br>
+    <strong>Enter a Paraballin' param dog</strong><br>
+    p: <input type="number" ng-model='psc.params.p'><br>
+    x-value: <input type="number" ng-model='psc.params.x'><br>
+
+    <button ng-click="psc.submit(psc.params.p)">Submit</button>
+    <br><br><br>
+
+    <div>
+    <canvas id="canvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+    </div>

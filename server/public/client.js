@@ -18,5 +18,8 @@ app.config(function($routeProvider) {
   }).when('/parab_shooter', {
     templateUrl: 'templates/parab_shooter.html',
     controller: 'ParabShooterController as psc'
+  }).when('/parab_shifter', {
+    templateUrl: 'templates/parab_shifter.html',
+    controller: 'ParabShifterController as psc'
   });
 });
