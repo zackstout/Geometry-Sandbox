@@ -12,9 +12,9 @@ app.config(function($routeProvider) {
   }).when('/matrix', {
     templateUrl: 'templates/matrix.html',
     controller: 'MatrixController as sc'
-  }).when('/shooter', {
-    templateUrl: 'templates/shooter.html',
-    controller: 'ShooterController as sc'
+  }).when('/ellipse_shifter', {
+    templateUrl: 'templates/ellipse_shifter.html',
+    controller: 'EllipseShifterController as esc'
   }).when('/parab_shooter', {
     templateUrl: 'templates/parab_shooter.html',
     controller: 'ParabShooterController as psc'

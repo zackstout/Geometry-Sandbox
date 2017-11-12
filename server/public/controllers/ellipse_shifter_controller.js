@@ -1,7 +1,7 @@
 
 
-app.controller('ShooterController', function () {
-    console.log('shooter controller created.');
+app.controller('EllipseShifterController', function () {
+    console.log('ellipse shifter controller created.');
     var canvas = document.getElementById('canvas');
       var ctx = canvas.getContext("2d");
     var vm = this;
@@ -21,6 +21,7 @@ var iteration = 0;
 
     //store location globally...but eh we just recalc later:
     vm.params.c = c;
+    vm.params.e = e;
 
 //draw foci:
     ctx.fillStyle = 'green';
@@ -76,6 +77,9 @@ ctx.translate(500, 500);
 
 //re-draw foci:
 ctx.beginPath();
+var e = c/a;
+vm.params.e = e;
+
   ctx.fillStyle = 'green';
   if (a > b) {
     ctx.arc(c*250, 0, 7, 0, 2*Math.PI);

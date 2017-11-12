@@ -10,7 +10,13 @@
     x-value: <input type="number" ng-model='psc.params.x'><br>
 
     <button ng-click="psc.submit(psc.params.p)">Submit</button>
-    <br><br><br>
+    <br>
+    <p>Enter an interval (stay within [-2.5, 2.5]):</p>
+    x-start: <input type="number" ng-model='psc.params.xStart'><br>
+    x-end: <input type="number" ng-model='psc.params.xEnd'><br>
+
+    <button ng-click="psc.throw()">Throw!</button><br><br>
+
 
     <div>
     <canvas id="canvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
