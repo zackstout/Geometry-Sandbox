@@ -70,12 +70,13 @@ ctx.translate(500, 500);
   var b = vm.params.b;
   var c = Math.sqrt(Math.abs(Math.pow(a, 2) - Math.pow(b, 2)));
 
+
 //re-draw path:
   circle(a, b, 100, 250);
 
+//re-draw foci:
 ctx.beginPath();
   ctx.fillStyle = 'green';
-//re-draw foci:
   if (a > b) {
     ctx.arc(c*250, 0, 7, 0, 2*Math.PI);
     ctx.stroke();
@@ -98,20 +99,40 @@ ctx.beginPath();
   }
 //ball's path:
     ctx.beginPath();
-    ctx.arc(250*vm.params.a*Math.cos(iteration*2*Math.PI/100), 250*vm.params.b*Math.sin(iteration*2*Math.PI/100), 10, 0, 2*Math.PI);
+    var x = 250*vm.params.a*Math.cos(iteration*2*Math.PI/100);
+    var y = 250*vm.params.b*Math.sin(iteration*2*Math.PI/100);
+    ctx.arc(x, y, 10, 0, 2*Math.PI);
     ctx.stroke();
     ctx.fillStyle = 'yellow';
     ctx.fill();
+
+    //tracing out lines to foci:
+    ctx.beginPath();
+    if (a > b) {
+      ctx.moveTo(c*250, 0);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(-c*250, 0);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    } else if (b > a) {
+      ctx.moveTo(0, c*250);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(0, -c*250);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
     iteration++;
 
-  // requestAnimationFrame(ball);
-}
+}// at last, end the ball function
 
 vm.throw = function() {
   console.log('throwin');
-  //making this number higher does make it go slower, but at much lower res:
   setInterval(ball, 50);
-
 };
-//YASSSS, now just need to erase previous balls:
 });
