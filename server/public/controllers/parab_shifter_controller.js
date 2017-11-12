@@ -4,11 +4,12 @@ app.controller('ParabShifterController', function () {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext("2d");
   var vm = this;
+  var iteration = 0;
   vm.params = {p: 0.25};
 
-  parabola(100, 4, 1/(vm.params.p*4), 0, 2.5, 1);
+  parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, 1);
   ctx.transform(-1, 0, 0, 1, 0, 0);
-  parabola(100, 4, 1/(vm.params.p*4), 0, 2.5, -1);
+  parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, -1);
   ctx.transform(-1, 0, 0, 1, 0, 0);
   //grid:
   ctx.moveTo(500, 0);
@@ -57,9 +58,9 @@ app.controller('ParabShifterController', function () {
     }
     //re-draw parabola:
     console.log(p, vm.params.x);
-    parabola(150, 4, 1/(4*p), 0, 2.5, 1);
+    parabola(200, 4, 1/(4*p), 0, 2.5, 1);
     ctx.transform(-1, 0, 0, 1, 0, 0);
-    parabola(150, 4, 1/(4*p), 0, 2.5, -1);
+    parabola(200, 4, 1/(4*p), 0, 2.5, -1);
     ctx.transform(-1, 0, 0, 1, 0, 0);
 
     //draw circle around point with x-coordinate of entered value to demonstrate equidistance:
@@ -78,24 +79,58 @@ app.controller('ParabShifterController', function () {
   }; //end of submit function
 
 
-var iteration = 0;
   function ball() {
-
+    ctx.clearRect(0,0,1000,1000);
+//path of the ball:
     ctx.beginPath();
 
     var x = 250 + iteration*2;
     var xNow = (x-500)/100;
-    ctx.arc(250 + iteration*2, 250 + xNow*xNow*100, 10, 0, 2*Math.PI);
+    ctx.arc(250 + iteration*2, 250 + xNow*xNow*100/(4*vm.params.p), 6, 0, 2*Math.PI);
     ctx.stroke();
-    //
-    // ctx.beginPath();
-    // ctx.arc(x, y, 6, 0, 2*Math.PI);
-    // ctx.stroke();
-    // ctx.fillStyle = 'green';
-    // ctx.fill();
-    // ctx.stroke();
-    ctx.fillStyle = 'yellow';
+    ctx.fillStyle = 'green';
     ctx.fill();
+//re-draw parabola:
+parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, 1);
+ctx.transform(-1, 0, 0, 1, 0, 0);
+parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, -1);
+ctx.transform(-1, 0, 0, 1, 0, 0);
+//redraw grid:
+ctx.moveTo(500, 0);
+ctx.lineTo(500, 1000);
+ctx.stroke();
+ctx.moveTo(0, 250);
+ctx.lineTo(1000, 250);
+ctx.stroke();
+
+//redraw in focus:
+ctx.beginPath();
+ctx.arc(500, 250+vm.params.p*100, 5, 0, 2*Math.PI);
+ctx.stroke();
+ctx.fillStyle = 'blue';
+ctx.fill();
+//redraw in directrix (dotted line):
+for (var i=0; i<50; i++) {
+  ctx.moveTo(i*20, 250-vm.params.p*100);
+  ctx.lineTo(i*20+10, 250-vm.params.p*100);
+  ctx.stroke();
+
+}
+
+// var x = 250 + iteration*2;
+// var xNow = (x-500)/100;
+// ctx.arc(250 + iteration*2, 250 + xNow*xNow*100/(4*vm.params.p), 6, 0, 2*Math.PI);
+// ctx.stroke();
+//   var newx = 500 + 100*vm.params.x;
+//   var newy = 250 + (vm.params.x*vm.params.x)*100/(4*vm.params.p);
+//   // console.log(newx, newy);
+//   xNow*xNow*100/(4*vm.params.p)-250+vm.params.p*100
+  ctx.beginPath();
+  ctx.arc(x, 250 + xNow*xNow*100/(4*vm.params.p), 50 - vm.params.p*100 + xNow*xNow*100/(4*vm.params.p), 0, 2*Math.PI);
+  ctx.stroke();
+
+
+
     iteration++;
 
   } //end of ball
