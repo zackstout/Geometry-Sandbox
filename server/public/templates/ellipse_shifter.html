@@ -1,15 +1,16 @@
 
-<h2>Ellipse Shifta</h2>
-<p>Keep a and b between 0 and 2...</p>
+<h2>Ellipse Foci</h2>
+<p>Keep a and b between 0 and 2:</p>
 a: <input type="number" ng-model='esc.params.a'><br>
 b: <input type="number" ng-model='esc.params.b'><br>
 <button ng-click="esc.drawEllipse(esc.params.a, esc.params.b)">Draw!</button>
 <br><br>
+<p>Click to watch the beauty of the ellipse!</p>
 <button ng-click="esc.throw()">Throw!</button>
 
 <p> e: {{esc.params.e}} </p>
 <p> The eccentricity of an ellipse, e, is a measure of how stretched out it is. The closer e is to 0, the more circular the ellipse. The closer to 1, the more elliptical.</p>
-<p> Pretty odd that pressing throw again increases the speed. Also annoying that we have to click a button to update e.</p>
+<!-- <p> Pretty odd that pressing throw again increases the speed. Also annoying that we have to click a button to update e.</p> -->
 
 
     <div>

@@ -81,7 +81,7 @@ app.controller('ParabShifterController', function () {
 
   function ball() {
     ctx.clearRect(0,0,1000,1000);
-//path of the ball:
+    //path of the ball:
     ctx.beginPath();
 
     var x = 250 + iteration*2;
@@ -90,46 +90,37 @@ app.controller('ParabShifterController', function () {
     ctx.stroke();
     ctx.fillStyle = 'green';
     ctx.fill();
-//re-draw parabola:
-parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, 1);
-ctx.transform(-1, 0, 0, 1, 0, 0);
-parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, -1);
-ctx.transform(-1, 0, 0, 1, 0, 0);
-//redraw grid:
-ctx.moveTo(500, 0);
-ctx.lineTo(500, 1000);
-ctx.stroke();
-ctx.moveTo(0, 250);
-ctx.lineTo(1000, 250);
-ctx.stroke();
+    //re-draw parabola:
+    parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, 1);
+    ctx.transform(-1, 0, 0, 1, 0, 0);
+    parabola(200, 4, 1/(vm.params.p*4), 0, 2.5, -1);
+    ctx.transform(-1, 0, 0, 1, 0, 0);
+    //redraw grid:
+    ctx.moveTo(500, 0);
+    ctx.lineTo(500, 1000);
+    ctx.stroke();
+    ctx.moveTo(0, 250);
+    ctx.lineTo(1000, 250);
+    ctx.stroke();
 
-//redraw in focus:
-ctx.beginPath();
-ctx.arc(500, 250+vm.params.p*100, 5, 0, 2*Math.PI);
-ctx.stroke();
-ctx.fillStyle = 'blue';
-ctx.fill();
-//redraw in directrix (dotted line):
-for (var i=0; i<50; i++) {
-  ctx.moveTo(i*20, 250-vm.params.p*100);
-  ctx.lineTo(i*20+10, 250-vm.params.p*100);
-  ctx.stroke();
+    //redraw in focus:
+    ctx.beginPath();
+    ctx.arc(500, 250+vm.params.p*100, 5, 0, 2*Math.PI);
+    ctx.stroke();
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    //redraw in directrix (dotted line):
+    for (var i=0; i<50; i++) {
+      ctx.moveTo(i*20, 250-vm.params.p*100);
+      ctx.lineTo(i*20+10, 250-vm.params.p*100);
+      ctx.stroke();
 
-}
-
-// var x = 250 + iteration*2;
-// var xNow = (x-500)/100;
-// ctx.arc(250 + iteration*2, 250 + xNow*xNow*100/(4*vm.params.p), 6, 0, 2*Math.PI);
-// ctx.stroke();
-//   var newx = 500 + 100*vm.params.x;
-//   var newy = 250 + (vm.params.x*vm.params.x)*100/(4*vm.params.p);
-//   // console.log(newx, newy);
-//   xNow*xNow*100/(4*vm.params.p)-250+vm.params.p*100
-  ctx.beginPath();
-  ctx.arc(x, 250 + xNow*xNow*100/(4*vm.params.p), 50 - vm.params.p*100 + xNow*xNow*100/(4*vm.params.p), 0, 2*Math.PI);
-  ctx.stroke();
-
-
+    }
+    
+    //draw circle around point:
+    ctx.beginPath();
+    ctx.arc(x, 250 + xNow*xNow*100/(4*vm.params.p), vm.params.p*100 + xNow*xNow*100/(4*vm.params.p), 0, 2*Math.PI);
+    ctx.stroke();
 
     iteration++;
 

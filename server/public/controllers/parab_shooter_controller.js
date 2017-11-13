@@ -93,6 +93,10 @@ app.controller('ParabShooterController', function () {
     iteration2++;
   } //end BALL
 
+  vm.showReflected = function() {
+    vm.params.showRef = true;
+  };
+
   function whereAreWe() {
     if (!gotOne) {
       var x = 500+vm.params.b*(iteration)*Math.cos(vm.params.a*Math.PI/180);
@@ -118,8 +122,11 @@ app.controller('ParabShooterController', function () {
         vm.params.x = x;
         vm.params.y = y;
 
-        //so yeah this is the line to comment out if we want to avoid that shimmering thing: 
-        // setInterval(ball2, 50);
+        //so yeah this is the line to comment out if we want to avoid that shimmering thing:
+        if (vm.params.showRef) {
+          setInterval(ball2, 50);
+
+        }
 
         // return;
       }

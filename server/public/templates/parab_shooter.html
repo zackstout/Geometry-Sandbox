@@ -1,11 +1,15 @@
 
 <h2>Parabolic Shooter</h2>
-<p>It seems to like a velocity of 5 vis a vis knowing where it is and when it's hitting the parabola...</p>
+<p>Angle is measured from the right, moving counterclockwise. Try a velocity of 5 for best results!</p>
 angle: <input type="number" ng-model='psc.params.a'><br>
 velocity: <input type="number" ng-model='psc.params.b'><br>
+<p>Press "fire" to shoot off the first ball; press "reset" to shoot off subsequent balls (or refresh the page).</p>
 <button ng-click="psc.shootBall(psc.params.a, psc.params.b)">Fire!</button>
 
 <button ng-click="psc.reset()">Reset!</button>
+<p>The reflected ball introduces some bugginess right now...</p>
+<button ng-click="psc.showReflected()">Show reflected ball</button>
+
 
     <div>
     <canvas id="canvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
